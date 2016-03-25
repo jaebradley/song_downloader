@@ -8,7 +8,5 @@ class StreamUrlIdentifier:
 
     def identify_stream_url(self, url):
         resolved_track = self.client.get('/resolve', url=url)
-        if 'obj' in resolved_track and 'stream_url' in resolved_track.obj:
-            stream_url = self.client.get(resolved_track.obj['stream_url'], allow_redirects=False)
-            if 'location' in stream_url:
-                return stream_url.location
+        if 'stream_url' in resolved_track.obj:
+            return self.client.get(resolved_track.obj['stream_url'], allow_redirects=False).location
