@@ -1,4 +1,5 @@
 from flask import Flask, request, Response
+import os
 
 from file_download.downloader import FileDownloader
 from soundcloud_api.stream_url_identifier import StreamUrlIdentifier
@@ -21,4 +22,5 @@ def download_soundcloud_song():
         temp_file.close()
 
 if __name__ == '__main__':
-    app.run()
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
